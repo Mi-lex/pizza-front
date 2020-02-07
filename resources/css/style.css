@@ -1,4 +1,5 @@
 @import './globals/normalize.css';
+@import './globals/fonts.css';
 
 :root {
 	--page-font-color: black;
