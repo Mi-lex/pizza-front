@@ -3,10 +3,10 @@
 
 :root {
 	--page-font-color: black;
-	--page-font: 'Roboto', sans-serif;
+	--page-font: 'Poppins', sans-serif;
 	--page-font-size: 16px;
 	--page-line-height: normal;
-	--page-bg-color: white;
+	--page-bg-color: #1E272E;
 }
 
 *,
@@ -27,8 +27,8 @@ html {
 body {
 	position: relative;
 	margin: 0;
-	background-color: #b4b7cc;
-	color: var(--page-bg-color);
+	background-color: var(--page-bg-color);
+	color: var(--page-font-color);
 
 	font-family: var(--page-font);
 	font-size: var(--page-font-size);
