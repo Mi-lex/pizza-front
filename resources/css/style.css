@@ -1,12 +1,14 @@
 @import './globals/normalize.css';
 @import './globals/fonts.css';
+@import './globals/common.css';
 
 :root {
 	--page-font-color: black;
 	--page-font: 'Poppins', sans-serif;
 	--page-font-size: 16px;
 	--page-line-height: normal;
-	--page-bg-color: #1E272E;
+	--page-bg-color: #1e272e;
+	--secondary-color: #fac564;
 }
 
 *,
@@ -55,4 +57,17 @@ img {
 	clip-path: inset(100%);
 
 	white-space: nowrap;
+}
+
+h1,
+h2 {
+	color: var(--secondary-color);
+	font-size: 2rem;
+}
+
+@media screen and (min-width: 500px) {
+	h1,
+	h2 {
+		font-size: 5rem;
+	}
 }

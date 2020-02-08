@@ -1,0 +1,19 @@
+.container {
+	width: 90%;
+	min-width: 320px;
+	max-width: 1280px;
+	padding: 0 5px;
+	margin: 0 auto;
+}
+
+.db-flex {
+	display: flex;
+}
+
+.justify-content-between {
+	justify-content: space-between;
+}
+
+.align-items-center {
+	align-items: center;
+}

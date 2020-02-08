@@ -104,13 +104,13 @@ const config = {
 			{
 				test: /\.svg$/,
 				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							name: './img/icons/[name].[ext]',
-						},
-					},
-					'svgo-loader',
+					// {
+					// 	loader: 'file-loader',
+					// 	options: {
+					// 		name: './img/icons/[name].[ext]',
+					// 	},
+					// },
+					'@svgr/webpack',
 				],
 			},
 			{

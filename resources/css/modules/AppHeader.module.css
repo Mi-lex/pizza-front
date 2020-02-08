@@ -1,0 +1,53 @@
+:root {
+	--secondary-color: #fac564;
+}
+
+.header {
+	padding: 2px 0;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 35px;
+	color: var(--secondary-color);
+	text-decoration: none;
+	max-height: 100%;
+}
+
+.logo svg {
+	fill: var(--secondary-color);
+}
+
+.link {
+	padding: 12px;
+	text-decoration: none;
+	color: white;
+	transition: all 0.3s linear;
+}
+
+.withIcon {
+	display: flex;
+	align-items: center;
+}
+
+.withIcon svg {
+	fill: white;
+	margin-right: 5px;
+	transition: inherit;
+}
+
+.link:hover {
+	color: var(--secondary-color);
+}
+
+.link.active svg,
+.link:hover svg {
+	fill: var(--secondary-color);
+}
+
+.active {
+	color: var(--secondary-color);
+}

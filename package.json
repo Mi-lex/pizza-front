@@ -28,6 +28,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
+    "@svgr/webpack": "^5.1.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "core-js": "^3.6.4",
@@ -53,8 +54,6 @@
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-prettier": "^6.0.0",
     "stylelint-config-recommended": "^3.0.0",
-    "svgo": "^1.1.1",
-    "svgo-loader": "^2.2.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.10.3"
