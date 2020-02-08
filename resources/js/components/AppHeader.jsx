@@ -2,19 +2,20 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import PizzaIcon from '../../img/logo.svg';
 import LoginIcon from '../../img/login.svg';
+import OrdersIcon from '../../img/order.svg';
 import classes from '../../css/modules/AppHeader.module.css';
 
 const AppHeader = () => {
-	const isLoggedIn = false;
+	const isLoggedIn = true;
 
 	return (
 		<header className={classes.header}>
-			<div className="container db-flex justify-content-between align-items-center">
+			<div className="container d-flex justify-content-between align-items-center">
 				<Link to="/" className={classes.logo}>
 					<PizzaIcon />
 					Pizza Alex
 				</Link>
-				<nav className="db-flex">
+				<nav className="d-flex">
 					<NavLink
 						to="/"
 						className={classes.link}
@@ -36,6 +37,7 @@ const AppHeader = () => {
 							className={`${classes.link} ${classes.withIcon}`}
 							activeClassName={classes.active}
 						>
+							<OrdersIcon />
 							{' '}
 							My Orders
 						</NavLink>
