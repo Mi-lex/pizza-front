@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { NavLink, useRouteMatch, useParams } from 'react-router-dom';
 import classes from '../../css/modules/Menu.module.css';

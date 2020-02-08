@@ -6,7 +6,7 @@ import OrdersIcon from '../../img/order.svg';
 import classes from '../../css/modules/AppHeader.module.css';
 
 const AppHeader = () => {
-	const isLoggedIn = true;
+	const isLoggedIn = false;
 
 	return (
 		<header className={classes.header}>

@@ -1,0 +1,65 @@
+.receipt {
+	display: flex;
+	flex-direction: column;
+	max-width: 400px;
+	position: absolute;
+	transition: 1s all ease-in-out;
+    background-color: white;
+    padding: 20px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 2px;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+    padding-bottom: 0px;
+}
+
+.receipt .alignRight {
+	text-align: right;
+}
+
+.receipt .total {
+	text-align: right;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.receipt table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.receipt thead {
+	border-bottom: 1px solid #d0d0d0;
+}
+
+.receipt td,
+th {
+	padding: 15px 5px;
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+	border-radius: 2px;
+}
+.receipt th {
+	padding: 15px 5px;
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+	border-radius: 2px;
+}
+
+.receipt td:nth-child(1) {
+	width: 34px;
+}
+
+.receipt td:nth-child(3) {
+	width: 65px;
+}
+
+.bold {
+	font-weight: bold;
+	font-size: 20px;
+}
