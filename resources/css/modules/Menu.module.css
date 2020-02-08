@@ -1,0 +1,31 @@
+:root {
+	--secondary-color: #fac564;
+}
+
+.navList {
+	display: flex;
+	justify-content: space-around;
+	padding: 1.5rem 0;
+	margin: 0;
+	list-style: none;
+}
+
+.link {
+	padding: 15px;
+	color: #eeeeee;
+	font-size: 2rem;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.link.active,
+.link:hover {
+	color: var(--secondary-color);
+	border-bottom: 2px solid var(--secondary-color);
+}
+
+.menuList {
+	margin: 0;
+	list-style: none;
+	padding: 0;
+}
