@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	width: 100%;
+	min-height: 200px;
+	overflow: hidden;
+    background-color: #eeeeee;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.img {
+	width: 30%;
+    height: auto;
+    background-image: linear-gradient(to right, #70E1F5, #FAC564, #fff);
+}
+
+.body {
+    display: flex;
+    width: 70%;
+	padding: 10px;
+	padding-top: 0;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.title {
+	text-transform: uppercase;
+    font-size: 2rem;
+    margin: 1.5rem 0;
+}
+
+.price {
+    font-size: 1.5rem;
+}
+
+.description {
+    margin-top: 0;
+}

@@ -7,19 +7,11 @@ import { classesExtractor } from '../utils';
 import CartItem from './CartItem';
 
 const Cart = () => {
-	const [isOpen, toggleCart] = useState(true);
+	const [isOpen, toggleCart] = useState(false);
 
 	const fakeCardItems = [
 		{
 			name: 'CLassic super',
-			type: 'pizza',
-			description:
-				' Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dolore provident inventore, saepe dolores repudiandae est nisi perspiciatis cupiditate laboriosam, illo sunt cum maiores recusandae earum fugiat harum numquam pariatur.',
-			summ: 12,
-			quantity: 1,
-		},
-		{
-			name: 'Greek',
 			type: 'pizza',
 			description:
 				' Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dolore provident inventore, saepe dolores repudiandae est nisi perspiciatis cupiditate laboriosam, illo sunt cum maiores recusandae earum fugiat harum numquam pariatur.',

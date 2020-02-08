@@ -83,4 +83,5 @@
 	max-height: 350px;
 	overflow: scroll;
 	padding: 0;
+	overflow-x: hidden;
 }
