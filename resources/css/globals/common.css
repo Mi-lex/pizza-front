@@ -15,12 +15,19 @@
 	display: flex;
 }
 
+.flex-wrap {
+	flex-wrap: wrap;
+}
 .flex-direction-column {
 	flex-direction: column;
 }
 
 .justify-content-between {
 	justify-content: space-between;
+}
+
+.justify-content-around {
+	justify-content: space-around;
 }
 
 .align-items-center {

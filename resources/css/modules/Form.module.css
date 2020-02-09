@@ -1,0 +1,26 @@
+form {
+	width: 90%;
+	max-width: 330px;
+	text-align: center;
+}
+
+.form textarea {
+	height: 126px;
+}
+
+.form input,
+.form textarea {
+	border: 0;
+	outline: 0;
+	padding: 1em;
+	border-radius: 8px;
+	display: block;
+	width: 100%;
+	margin-top: 1em;
+	resize: none;
+}
+
+.form input:focus,
+.form textarea:focus {
+	border: 2px solid #fac564;
+}
