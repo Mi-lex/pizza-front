@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from '../../css/modules/Cart.module.css';
-import CartIcon from '../../img/cart.svg';
-import ArrowIcon from '../../img/arrow.svg';
+import { CartIcon, ArrowIcon } from '../assets/img';
 import { classesExtractor } from '../utils';
 import CartItem from './CartItem';
 
@@ -58,11 +57,7 @@ const Cart = () => {
 			<div className={classes.body}>
 				<ul className={classes.list}>
 					{fakeCardItems.map(({ name, quantity }) => (
-						<CartItem
-							key={name}
-							name={name}
-							quantity={quantity}
-						/>
+						<CartItem key={name} name={name} quantity={quantity} />
 					))}
 				</ul>
 				<Link to="/checkout" className={classes.link}>

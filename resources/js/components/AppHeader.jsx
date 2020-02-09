@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import PizzaIcon from '../../img/logo.svg';
-import LoginIcon from '../../img/login.svg';
-import OrdersIcon from '../../img/order.svg';
+import { PizzaIcon, OrdersIcon, LoginIcon } from '../assets/img';
 import classes from '../../css/modules/AppHeader.module.css';
 
 const AppHeader = () => {
@@ -37,9 +35,7 @@ const AppHeader = () => {
 							className={`${classes.link} ${classes.withIcon}`}
 							activeClassName={classes.active}
 						>
-							<OrdersIcon />
-							{' '}
-							My Orders
+							<OrdersIcon /> My Orders
 						</NavLink>
 					) : (
 						<NavLink
