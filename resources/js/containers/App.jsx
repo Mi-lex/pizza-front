@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home, Menu, Orders, Checkout, Login, SignUp } from '../pages';
 import AppHeader from '../components/AppHeader';
 import Cart from '../components/Cart';
+import CurrencySwitcher from '../components/CurrencySwitcher';
 
 const App = () => {
 	return (
@@ -18,6 +19,7 @@ const App = () => {
 						<Route path="/log-in" component={Login} />
 						<Route path="/sign-up" component={SignUp} />
 					</Switch>
+					<CurrencySwitcher />
 					<Cart />
 				</div>
 			</main>
