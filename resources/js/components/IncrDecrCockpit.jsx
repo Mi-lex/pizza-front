@@ -24,15 +24,6 @@ const IncrDecrCockpit = (props) => {
 			className={`${className} d-flex justify-content-between`}
 			{...restPorps}
 		>
-			<button
-				type="button"
-				className={classes.btn}
-				style={btnStyles}
-				onClick={onIncrement}
-			>
-				+
-			</button>
-			{displayAmount && amount}
 			{decrementer && (
 				<button
 					type="button"
@@ -43,6 +34,15 @@ const IncrDecrCockpit = (props) => {
 					-
 				</button>
 			)}
+			{displayAmount && amount}
+			<button
+				type="button"
+				className={classes.btn}
+				style={btnStyles}
+				onClick={onIncrement}
+			>
+				+
+			</button>
 		</div>
 	);
 };
