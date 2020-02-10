@@ -39,7 +39,7 @@ const AppHeader = () => {
 						</NavLink>
 					) : (
 						<NavLink
-							to="/login"
+							to="/log-in"
 							className={`${classes.link} ${classes.withIcon}`}
 							activeClassName={classes.active}
 						>

@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import classes from '../../css/modules/Checkout.module.css';
 import Receipt from '../components/Receipt';
 import ContactForm from '../components/ContactForm';
