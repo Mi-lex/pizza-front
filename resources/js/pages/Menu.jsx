@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useRouteMatch, useParams } from 'react-router-dom';
 import classes from '../../css/modules/Menu.module.css';
 import MenuItem from '../components/MenuItem';
+import Spinner from '../components/Spinner';
 
 const Menu = () => {
 	const { url } = useRouteMatch();
@@ -61,19 +62,23 @@ const Menu = () => {
 					</ul>
 				</nav>
 				<ul className={classes.menuList}>
-					{items.map((menuItem) => {
-						const { name, id, type, description, price } = menuItem;
-						// Could have used spread operator ofc, it's for readability
-						return (
-							<MenuItem
-								key={id}
-								name={name}
-								type={type}
-								description={description}
-								price={price}
-							/>
-						);
-					})}
+					{items.length === 0 ? (
+						<Spinner />
+					) : (
+						items.map((menuItem) => {
+							const { name, id, type, description, price } = menuItem;
+							// Could have used spread operator ofc, it's for readability
+							return (
+								<MenuItem
+									key={id}
+									name={name}
+									type={type}
+									description={description}
+									price={price}
+								/>
+							);
+						})
+					)}
 				</ul>
 			</section>
 		</div>

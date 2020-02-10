@@ -25,6 +25,9 @@
 }
 
 .menuList {
+	width: 100%;
+	min-height: 300px;
+	position: relative;
 	margin: 0;
 	list-style: none;
 	padding: 0;

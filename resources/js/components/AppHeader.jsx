@@ -13,6 +13,7 @@ const AppHeader = () => {
 					<PizzaIcon />
 					Pizza Alex
 				</Link>
+
 				<nav className="d-flex">
 					<NavLink
 						to="/"
