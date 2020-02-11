@@ -23,6 +23,7 @@ const CartItem = (props) => {
 				src={`img/menu_items/${type}/${name
 					.toLowerCase()
 					.replace(/ /g, '_')}.png`}
+				alt={`${type}-${name}`}
 			/>
 			<div className={classes.body}>
 				<h3 className={classes.title}>{name}</h3>
@@ -33,9 +34,9 @@ const CartItem = (props) => {
 						onDecrement={onDecrementClick}
 					/>
 
-					<span
-						className={classes.summ}
-					>{`${currencyPrice}${currency.symbol}`}</span>
+					<span className={classes.summ}>{`${currencyPrice * quantity}${
+						currency.symbol
+					}`}</span>
 				</div>
 			</div>
 		</div>
@@ -45,6 +46,7 @@ const CartItem = (props) => {
 CartItem.propTypes = {
 	item: PropTypes.shape({
 		name: PropTypes.string.isRequired,
+		type: PropTypes.string.isRequired,
 		price: PropTypes.string.isRequired,
 		quantity: PropTypes.number.isRequired,
 	}).isRequired,

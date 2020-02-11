@@ -25,7 +25,6 @@ const reducer = (state = INITIAL_STATE, action) => {
 				foundItem.quantity++;
 			} else {
 				const { id, name, type, price } = item;
-				console.log(id);
 
 				updatedCartItems.push({
 					id,

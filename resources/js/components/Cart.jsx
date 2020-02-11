@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classes from '../../css/modules/Cart.module.css';
@@ -21,9 +21,6 @@ const Cart = () => {
 	const itemCount = cartItems.length;
 
 	const onClickHandler = () => {
-		if (itemCount < 1) {
-			return;
-		}
 		toggleCart(!isOpen);
 	};
 
@@ -39,6 +36,12 @@ const Cart = () => {
 		dispatch(removeItem(item));
 	};
 
+	useEffect(() => {
+		if (itemCount === 0 && isOpen) {
+			toggleCart(false);
+		}
+	}, [itemCount]);
+
 	const containerClasses = ['container'];
 
 	if (isOpen) {
@@ -51,6 +54,7 @@ const Cart = () => {
 				type="button"
 				className={classes.toggler}
 				onClick={onClickHandler}
+				disabled={itemCount === 0}
 			>
 				<CartIcon className={classes.icon} />
 				{itemCount > 0
