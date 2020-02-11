@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home, Menu, Orders, Checkout, Login, SignUp } from '../pages';
 import AppHeader from '../components/AppHeader';
 import Cart from '../components/Cart';
-import CurrencySwitcher from '../components/CurrencySwitcher';
+import CurrencySwitcher from './CurrencySwitcher';
 import configureStore from '../redux/configureStore';
 
 const store = configureStore();

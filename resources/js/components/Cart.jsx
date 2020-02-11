@@ -1,38 +1,42 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classes from '../../css/modules/Cart.module.css';
 import { CartIcon, ArrowIcon } from '../assets/img';
 import { classesExtractor } from '../utils';
 import CartItem from './CartItem';
+import {
+	incrementItem,
+	decrementItem,
+	removeItem,
+} from '../redux/ducks/cart/actions';
 
 const Cart = () => {
 	const [isOpen, toggleCart] = useState(false);
-
-	const fakeCardItems = [
-		{
-			name: 'CLassic super',
-			type: 'pizza',
-			description:
-				' Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dolore provident inventore, saepe dolores repudiandae est nisi perspiciatis cupiditate laboriosam, illo sunt cum maiores recusandae earum fugiat harum numquam pariatur.',
-			summ: 12,
-			quantity: 1,
-		},
-		{
-			name: 'Greek',
-			type: 'pizza',
-			description:
-				' Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dolore provident inventore, saepe dolores repudiandae est nisi perspiciatis cupiditate laboriosam, illo sunt cum maiores recusandae earum fugiat harum numquam pariatur.',
-			summ: 12,
-			quantity: 1,
-		},
-	];
-	const itemCount = fakeCardItems.length;
+	const { cartItems, currency } = useSelector((state) => ({
+		cartItems: state.cartItems,
+		currency: state.currency,
+	}));
+	const dispatch = useDispatch();
+	const itemCount = cartItems.length;
 
 	const onClickHandler = () => {
 		if (itemCount < 1) {
 			return;
 		}
 		toggleCart(!isOpen);
+	};
+
+	const incrementHandler = (item) => {
+		dispatch(incrementItem(item));
+	};
+
+	const decrementHanlder = (item) => {
+		dispatch(decrementItem(item));
+	};
+
+	const removeItemHanlder = (item) => {
+		dispatch(removeItem(item));
 	};
 
 	const containerClasses = ['container'];
@@ -56,9 +60,18 @@ const Cart = () => {
 			</button>
 			<div className={classes.body}>
 				<ul className={classes.list}>
-					{fakeCardItems.map(({ name, quantity }) => (
-						<CartItem key={name} name={name} quantity={quantity} />
-					))}
+					{cartItems.map((item) => {
+						return (
+							<CartItem
+								key={item.id}
+								item={item}
+								currency={currency}
+								onIncrementClick={incrementHandler.bind(null, item)}
+								onDecrementClick={decrementHanlder.bind(null, item)}
+								onRemoveItemClick={removeItemHanlder.bind(null, item)}
+							/>
+						);
+					})}
 				</ul>
 				<Link to="/checkout" className={classes.link}>
 					Checkout

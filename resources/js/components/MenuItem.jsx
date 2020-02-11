@@ -4,8 +4,8 @@ import IncrDecrCockpit from './IncrDecrCockpit';
 import classes from '../../css/modules/MenuItem.module.css';
 import { toFixed } from '../utils';
 
-const MenuItem = (props) => {
-	const { name, type, description, price, currency } = props;
+const MenuItem = ({ item, currency, addToTheCartHandler }) => {
+	const { name, type, description, price } = item;
 
 	const currencyPrice = toFixed(price * currency.toDollarRatio, 2);
 
@@ -30,7 +30,7 @@ const MenuItem = (props) => {
 						iconSize={40}
 						decrementer={false}
 						displayAmount={false}
-						onIncrement={() => {}}
+						onIncrement={addToTheCartHandler}
 					/>
 				</div>
 			</div>
@@ -39,10 +39,12 @@ const MenuItem = (props) => {
 };
 
 MenuItem.propTypes = {
-	name: PropTypes.string.isRequired,
-	type: PropTypes.string.isRequired,
-	description: PropTypes.string.isRequired,
-	price: PropTypes.string.isRequired,
+	item: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		type: PropTypes.string.isRequired,
+		description: PropTypes.string.isRequired,
+		price: PropTypes.string.isRequired,
+	}).isRequired,
 	currency: PropTypes.shape({
 		name: PropTypes.string,
 		toDollarRatio: PropTypes.number,

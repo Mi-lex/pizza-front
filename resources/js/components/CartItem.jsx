@@ -2,19 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IncrDecrCockpit from './IncrDecrCockpit';
 import classes from '../../css/modules/CartItem.module.css';
+import { toFixed } from '../utils';
 
-const CartItem = ({ name, quantity }) => {
-	const currency = '$';
-	const summ = quantity * 12;
+const CartItem = (props) => {
+	const {
+		item,
+		currency,
+		onIncrementClick,
+		onDecrementClick,
+		onRemoveItemClick,
+	} = props;
+
+	const { name, type, price, quantity } = item;
+	const currencyPrice = toFixed(price * currency.toDollarRatio, 2);
+
 	return (
 		<div className={classes.container}>
-			<img src={`img/menu_items/pizza/${name.toLowerCase().replace(' ', '_')}.png`} className={classes.img} alt={name} />
+			<img
+				className={classes.img}
+				src={`img/menu_items/${type}/${name
+					.toLowerCase()
+					.replace(/ /g, '_')}.png`}
+			/>
 			<div className={classes.body}>
 				<h3 className={classes.title}>{name}</h3>
 				<div className="d-flex justify-content-between align-items-center">
-					<IncrDecrCockpit amount={quantity} onIncrement={() => {}} />
+					<IncrDecrCockpit
+						amount={quantity}
+						onIncrement={onIncrementClick}
+						onDecrement={onDecrementClick}
+					/>
 
-					<span className={classes.summ}>{`${summ}${currency}`}</span>
+					<span
+						className={classes.summ}
+					>{`${currencyPrice}${currency.symbol}`}</span>
 				</div>
 			</div>
 		</div>
@@ -22,8 +43,19 @@ const CartItem = ({ name, quantity }) => {
 };
 
 CartItem.propTypes = {
-	name: PropTypes.string.isRequired,
-	quantity: PropTypes.number.isRequired,
+	item: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		price: PropTypes.string.isRequired,
+		quantity: PropTypes.number.isRequired,
+	}).isRequired,
+	onIncrementClick: PropTypes.func.isRequired,
+	onDecrementClick: PropTypes.func.isRequired,
+	onRemoveItemClick: PropTypes.func.isRequired,
+	currency: PropTypes.shape({
+		name: PropTypes.string,
+		toDollarRatio: PropTypes.number,
+		symbol: PropTypes.string,
+	}).isRequired,
 };
 
 export default CartItem;
