@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IncrDecrCockpit from './IncrDecrCockpit';
 import classes from '../../css/modules/MenuItem.module.css';
+import { toFixed } from '../utils';
 
 const MenuItem = (props) => {
-	const { name, type, description, price } = props;
+	const { name, type, description, price, currency } = props;
 
-	const currency = '$';
+	const currencyPrice = toFixed(price * currency.toDollarRatio, 2);
 
 	return (
 		<div className={classes.container}>
@@ -21,7 +22,9 @@ const MenuItem = (props) => {
 				<h3 className={classes.title}>{name}</h3>
 				<p className={classes.description}>{description}</p>
 				<div className="d-flex justify-content-between align-items-center">
-					<span className={classes.price}>{`${price}${currency}`}</span>
+					<span
+						className={classes.price}
+					>{`${currencyPrice}${currency.symbol}`}</span>
 
 					<IncrDecrCockpit
 						iconSize={40}
@@ -40,6 +43,11 @@ MenuItem.propTypes = {
 	type: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
 	price: PropTypes.string.isRequired,
+	currency: PropTypes.shape({
+		name: PropTypes.string,
+		toDollarRatio: PropTypes.number,
+		symbol: PropTypes.string,
+	}).isRequired,
 };
 
 export default MenuItem;

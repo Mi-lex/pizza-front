@@ -3,3 +3,8 @@ export const classesExtractor = (classesObj, classNames) => {
 };
 
 export const generateKey = () => new Date().getTime() + Math.random();
+
+export const toFixed = (number, decimals) => {
+	const x = 10 ** Number(decimals) + 1;
+	return (Number(number) + 1 / x).toFixed(decimals);
+};

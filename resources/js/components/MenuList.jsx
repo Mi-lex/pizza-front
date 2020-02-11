@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MenuItem from './MenuItem';
 import classes from '../../css/modules/MenuList.module.css';
 
-const MenuList = ({ items }) => {
+const MenuList = ({ items, currency }) => {
 	return (
 		<ul className={classes.menuList}>
 			{items.map((menuItem) => {
@@ -16,6 +16,7 @@ const MenuList = ({ items }) => {
 						name={name}
 						type={type}
 						description={description}
+						currency={currency}
 						price={price}
 					/>
 				);

@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useRouteMatch, useParams } from 'react-router-dom';
+import { fetchItemsRequest } from '../redux/ducks/menu-items/actions';
 import classes from '../../css/modules/Menu.module.css';
-import MenuItem from '../components/MenuItem';
+import MenuList from '../components/MenuList';
 import Spinner from '../components/Spinner';
 
 const Menu = () => {
 	const { url } = useRouteMatch();
 	const { type = 'pizza' } = useParams();
 
-	const [items, setItems] = useState([]);
+	const {
+		currency,
+		menuItems: { list: items, pending, error },
+	} = useSelector((state) => ({
+		currency: state.currency.present,
+		menuItems: state.menuItems,
+	}));
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log('checking');
-
-		(async function fetchMenuItems() {
-			try {
-				const response = await fetch('http://localhost:8000/api/menu_items');
-
-				const items = await response.json();
-
-				setItems(items);
-			} catch (e) {
-				console.error(e);
-			}
-		})();
+		if (items.length === 0) {
+			dispatch(fetchItemsRequest());
+		}
 	}, []);
 
 	return (
@@ -61,25 +61,13 @@ const Menu = () => {
 						</li>
 					</ul>
 				</nav>
-				<ul className={classes.menuList}>
-					{items.length === 0 ? (
-						<Spinner />
-					) : (
-						items.map((menuItem) => {
-							const { name, id, type, description, price } = menuItem;
-							// Could have used spread operator ofc, it's for readability
-							return (
-								<MenuItem
-									key={id}
-									name={name}
-									type={type}
-									description={description}
-									price={price}
-								/>
-							);
-						})
-					)}
-				</ul>
+				{pending ? (
+					<Spinner />
+				) : error ? (
+					<h2 style={{ color: red }}>{error}</h2>
+				) : (
+					<MenuList currency={currency} items={items} />
+				)}
 			</section>
 		</div>
 	);
