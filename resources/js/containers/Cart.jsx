@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classes from '../../css/modules/Cart.module.css';
-import { CartIcon, ArrowIcon } from '../assets/img';
 import { classesExtractor } from '../utils';
-import CartItem from './CartItem';
+import CartItem from '../components/CartItem';
 import {
 	incrementItem,
 	decrementItem,
 	removeItem,
 } from '../redux/ducks/cart/actions';
+import CartHeader from '../components/CartHeader';
 
 const Cart = () => {
 	const [isOpen, toggleCart] = useState(false);
@@ -18,9 +18,18 @@ const Cart = () => {
 		currency: state.currency,
 	}));
 	const dispatch = useDispatch();
-	const itemCount = cartItems.length;
 
-	const onClickHandler = () => {
+	const { totalSumm, itemCount } = cartItems.reduce(
+		(accum, cartItem) => {
+			accum.totalSumm += cartItem.price * cartItem.quantity;
+			accum.itemCount += cartItem.quantity;
+
+			return accum;
+		},
+		{ totalSumm: 0, itemCount: 0 },
+	);
+
+	const toggleCartHanlder = () => {
 		toggleCart(!isOpen);
 	};
 
@@ -50,18 +59,13 @@ const Cart = () => {
 
 	return (
 		<div className={classesExtractor(classes, containerClasses)}>
-			<button
-				type="button"
-				className={classes.toggler}
-				onClick={onClickHandler}
-				disabled={itemCount === 0}
-			>
-				<CartIcon className={classes.icon} />
-				{itemCount > 0
-					? `${itemCount} item${itemCount > 1 ? 's' : ''}`
-					: 'Empty cart'}
-				<ArrowIcon className={classesExtractor(classes, ['icon', 'arrow'])} />
-			</button>
+			<CartHeader
+				currency={currency}
+				itemCount={itemCount}
+				totalSumm={totalSumm}
+				onClick={toggleCartHanlder}
+				isCartOpen={isOpen}
+			/>
 			<div className={classes.body}>
 				<ul className={classes.list}>
 					{cartItems.map((item) => {

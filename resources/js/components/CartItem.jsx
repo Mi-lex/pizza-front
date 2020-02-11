@@ -34,9 +34,7 @@ const CartItem = (props) => {
 						onDecrement={onDecrementClick}
 					/>
 
-					<span className={classes.summ}>{`${currencyPrice * quantity}${
-						currency.symbol
-					}`}</span>
+					<span className={classes.summ}>{`${currencyPrice * quantity}${currency.symbol}`}</span>
 				</div>
 			</div>
 		</div>

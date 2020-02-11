@@ -13,39 +13,6 @@
 	align-items: flex-end;
 }
 
-.toggler {
-	display: flex;
-	width: 100%;
-	min-width: 255px;
-	max-height: 65px;
-	align-items: center;
-	justify-content: space-between;
-	padding: 15px;
-	background-color: white;
-	border-width: 3px;
-	border-style: solid;
-	border-color: black;
-	transition: all 0.2s linear;
-}
-
-.toggler:hover {
-	border-color: var(--secondary-color);
-	color: var(--secondary-color);
-}
-
-.icon {
-	transition: inherit;
-	fill: black;
-}
-
-.toggler:hover .icon {
-	fill: var(--secondary-color);
-}
-
-.open .arrow {
-	transform: rotate(180deg);
-}
-
 .body {
 	display: none;
 	width: 100%;

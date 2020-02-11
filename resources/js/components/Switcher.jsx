@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import classes from '../../css/modules/Switcher.module.css';
 import PropTypes from 'prop-types';
+import classes from '../../css/modules/Switcher.module.css';
 
 function Switcher({
 	firstOption,
@@ -49,6 +49,7 @@ function Switcher({
 			role="radiogroup"
 		>
 			<button
+				type="button"
 				role="radio"
 				onClick={handleFirstClick}
 				aria-checked={isFirstChecked}
@@ -56,6 +57,7 @@ function Switcher({
 				{firstLabel}
 			</button>
 			<button
+				type="button"
 				role="radio"
 				onClick={handleSecondClick}
 				aria-checked={!isFirstChecked}
