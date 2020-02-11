@@ -23,12 +23,3 @@
 	color: var(--secondary-color);
 	border-bottom: 2px solid var(--secondary-color);
 }
-
-.menuList {
-	width: 100%;
-	min-height: 300px;
-	position: relative;
-	margin: 0;
-	list-style: none;
-	padding: 0;
-}

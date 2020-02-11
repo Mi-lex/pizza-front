@@ -1,7 +1,7 @@
-const FETCH_ITEMS_REQUEST = 'FETCH_ITEMS';
-const FETCH_ITEMS_PENDING = 'FETCH_ITEMS';
-const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
-const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR';
+const FETCH_ITEMS_REQUEST = 'pizza/menu-items/FETCH_ITEMS';
+const FETCH_ITEMS_PENDING = 'pizza/menu-items/FETCH_ITEMS';
+const FETCH_ITEMS_SUCCESS = 'pizza/menu-items/FETCH_ITEMS_SUCCESS';
+const FETCH_ITEMS_ERROR = 'pizza/menu-items/FETCH_ITEMS_ERROR';
 
 export const fetchItemsRequest = () => ({
 	type: FETCH_ITEMS_REQUEST,
