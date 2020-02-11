@@ -5,7 +5,7 @@ import classes from '../../css/modules/CurrencySwitcher.module.css';
 import { changeCurrency } from '../redux/ducks/currency/actions';
 
 const CurrencySwitcher = () => {
-	const currency = useSelector((state) => state.currency.present.name);
+	const currency = useSelector((state) => state.currency.name);
 	const dispatch = useDispatch();
 
 	const handleCurrencySwitch = (newCurrency) => {

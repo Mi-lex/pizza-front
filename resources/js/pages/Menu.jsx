@@ -14,9 +14,8 @@ const Menu = () => {
 		currency,
 		menuItems: { list: items, pending, error },
 	} = useSelector((state) => ({
-		currency: state.currency.present,
-		menuItems: state.menuItems,
-	}));
+		currency: state.currency,
+		menuItems: state.menuItems,));
 
 	const dispatch = useDispatch();
 
