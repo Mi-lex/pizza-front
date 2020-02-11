@@ -8,6 +8,10 @@
     margin-bottom: 1.5rem;
 }
 
+.container:last-child {
+    margin-bottom: 2rem;
+}
+
 .img {
 	width: 30%;
     height: auto;

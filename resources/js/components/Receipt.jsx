@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from '../../css/modules/Receipt.module.css';
+import { toFixed } from '../utils';
 
 const Receipt = (props) => {
-	const { cartItems } = props;
+	const { cartItems, currency } = props;
+	const deliveryCost = 3.5;
+
+	const total =
+		cartItems.reduce(
+			(summ, { price, quantity }) => summ + price * quantity,
+			0,
+		) + deliveryCost;
+
+	const currencyTotal = toFixed(total * currency.toDollarRatio, 2);
 
 	return (
 		<div className={classes.receipt}>
@@ -22,30 +32,32 @@ const Receipt = (props) => {
 						</thead>
 						<tbody>
 							{cartItems.map((item) => {
-								const { id, name, qty } = item;
+								const { id, name, quantity, price } = item;
 
 								return (
 									<tr key={id}>
-										<td>{qty}</td>
+										<td>{quantity}</td>
 										<td>{name}</td>
-										<td className={classes.alignRight}>$44</td>
+										<td className={classes.alignRight}>
+											{`${currency.symbol}
+											${toFixed(quantity * price * currency.toDollarRatio, 2)}`}
+										</td>
 									</tr>
 								);
 							})}
 							<tr>
-								<td>1</td>
-								<td>Banana Nut Muffin</td>
-								<td className={classes.alignRight}>$2.00</td>
+								<td />
+								<td className={classes.alignRight}>Delivery</td>
+								<td className={classes.alignRight}>{`${
+									currency.symbol
+								}${toFixed(deliveryCost * currency.toDollarRatio, 2)}`}</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td className={classes.alignRight}>Tax</td>
-								<td className={classes.alignRight}>$0.50</td>
-							</tr>
-							<tr>
-								<td></td>
+								<td />
 								<td className={classes.total}>Total</td>
-								<td className={classes.total}>$6.75</td>
+								<td
+									className={classes.total}
+								>{`${currency.symbol}${currencyTotal}`}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -56,7 +68,19 @@ const Receipt = (props) => {
 };
 
 Receipt.propTypes = {
-	cartItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+	cartItems: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string.isRequired,
+			type: PropTypes.string.isRequired,
+			quantity: PropTypes.number.isRequired,
+			price: PropTypes.string.isRequired,
+		}),
+	).isRequired,
+	currency: PropTypes.shape({
+		name: PropTypes.string,
+		toDollarRatio: PropTypes.number.isRequired,
+		symbol: PropTypes.string.isRequired,
+	}).isRequired,
 };
 
 export default Receipt;
