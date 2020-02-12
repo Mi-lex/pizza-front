@@ -7,7 +7,7 @@ import { toFixed } from '../utils';
 const CartHeader = (props) => {
 	const { itemCount, onClick, currency, totalSumm, isCartOpen } = props;
 
-	const currencyTotalSumm = toFixed(totalSumm * currency.toDollarRatio, 2);
+	const currencyTotalSumm = toFixed(totalSumm * currency.toCurrencyRate, 2);
 
 	let headerChildren = 'Empty Cart';
 
@@ -51,7 +51,7 @@ CartHeader.propTypes = {
 	onClick: PropTypes.func.isRequired,
 	currency: PropTypes.shape({
 		name: PropTypes.string,
-		toDollarRatio: PropTypes.number,
+		toCurrencyRate: PropTypes.number,
 		symbol: PropTypes.string,
 	}).isRequired,
 };

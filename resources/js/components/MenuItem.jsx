@@ -7,7 +7,7 @@ import { toFixed } from '../utils';
 const MenuItem = ({ item, currency, addToTheCartHandler }) => {
 	const { name, type, description, price } = item;
 
-	const currencyPrice = toFixed(price * currency.toDollarRatio, 2);
+	const currencyPrice = toFixed(price * currency.toCurrencyRate, 2);
 
 	return (
 		<div className={classes.container}>
@@ -47,7 +47,7 @@ MenuItem.propTypes = {
 	}).isRequired,
 	currency: PropTypes.shape({
 		name: PropTypes.string,
-		toDollarRatio: PropTypes.number,
+		toCurrencyRate: PropTypes.number,
 		symbol: PropTypes.string,
 	}).isRequired,
 };

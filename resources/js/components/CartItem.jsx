@@ -14,7 +14,7 @@ const CartItem = (props) => {
 	} = props;
 
 	const { name, type, price, quantity } = item;
-	const currencyPrice = toFixed(price * currency.toDollarRatio, 2);
+	const currencyPrice = toFixed(price * currency.toCurrencyRate, 2);
 
 	return (
 		<div className={classes.container}>
@@ -57,7 +57,7 @@ CartItem.propTypes = {
 	onRemoveItemClick: PropTypes.func.isRequired,
 	currency: PropTypes.shape({
 		name: PropTypes.string,
-		toDollarRatio: PropTypes.number,
+		toCurrencyRate: PropTypes.number,
 		symbol: PropTypes.string,
 	}).isRequired,
 };

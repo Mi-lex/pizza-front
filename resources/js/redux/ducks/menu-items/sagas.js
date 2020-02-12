@@ -5,6 +5,7 @@ import actions, { types } from './actions';
 function* fetchMenuItems() {
 	try {
 		const items = yield call(api.fetchMenuItems, `${baseUrl}/menu_items`);
+		
 		yield put(actions.fetchItemsSuccess(items));
 	} catch (err) {
 		yield put(actions.fetchItemsError(err.message));

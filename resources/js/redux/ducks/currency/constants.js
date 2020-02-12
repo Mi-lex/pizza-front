@@ -1,12 +1,12 @@
 const currencies = [
 	{
 		name: 'dollar',
-		toDollarRatio: 1,
+		toCurrencyRate: 1,
 		symbol: '$',
 	},
 	{
 		name: 'euro',
-		toDollarRatio: 1.3,
+		toCurrencyRate: 0.92,
 		symbol: '€',
 	},
 ];
