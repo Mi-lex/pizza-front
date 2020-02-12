@@ -10,60 +10,66 @@ const findInTheCart = (item, cartItems) => {
 };
 
 const removeFromCart = (item, cartItems) => {
-	return cartItems.filter((cartItem) => cartItem.id !== item.id);
+	const filteredItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
+	return [...filteredItems];
 };
 
-const INITIAL_STATE = [];
+const localStorageSync = (state) => {
+	localStorage.setItem('menuItems', JSON.stringify(state));
+
+	return state;
+};
+
+const storedState = localStorage.getItem('menuItems');
+const INITIAL_STATE = storedState ? JSON.parse(storedState) : [];
 
 const reducer = (state = INITIAL_STATE, action) => {
-	switch (action.type) {
-		case types.ADD_ITEM: {
-			const item = action.payload;
-			const { foundItem, updatedCartItems } = findInTheCart(item, state);
+	const { type } = action;
+	let updatedState = state;
 
-			if (foundItem) {
-				foundItem.quantity++;
-			} else {
-				const { id, name, type, price } = item;
+	if (type === types.ADD_ITEM) {
+		const item = action.payload;
+		const { foundItem, updatedCartItems } = findInTheCart(item, state);
 
-				updatedCartItems.push({
-					id,
-					name,
-					type,
-					price,
-					quantity: 1,
-				});
-			}
-
-			return updatedCartItems;
-		}
-		case types.REMOVE_ITEM: {
-			return removeFromCart(action.payload, state);
-		}
-		case types.INCREMENT_ITEM: {
-			const { foundItem, updatedCartItems } = findInTheCart(
-				action.payload,
-				state,
-			);
+		if (foundItem) {
 			foundItem.quantity++;
+		} else {
+			const { id, name, type, price } = item;
 
-			return updatedCartItems;
+			updatedCartItems.push({
+				id,
+				name,
+				type,
+				price,
+				quantity: 1,
+			});
 		}
-		case types.DECREMENT_ITEM: {
-			const { foundItem, updatedCartItems } = findInTheCart(
-				action.payload,
-				state,
-			);
+		updatedState = updatedCartItems;
+	} else if (type === types.REMOVE_ITEM) {
+		updatedState = removeFromCart(action.payload, state);
+	} else if (type === types.INCREMENT_ITEM) {
+		const { foundItem, updatedCartItems } = findInTheCart(
+			action.payload,
+			state,
+		);
+		foundItem.quantity++;
+		updatedState = updatedCartItems;
+	} else if (type === types.DECREMENT_ITEM) {
+		const { foundItem, updatedCartItems } = findInTheCart(
+			action.payload,
+			state,
+		);
 
-			if (foundItem.quantity === 1) {
-				return removeFromCart(foundItem, updatedCartItems);
-			}
+		if (foundItem.quantity === 1) {
+			updatedState = removeFromCart(foundItem, updatedCartItems);
+		} else {
 			foundItem.quantity--;
-			return updatedCartItems;
+
+			updatedState = updatedCartItems;
 		}
-		default:
-			return state;
 	}
+
+	return localStorageSync(updatedState);
 };
 
 export default reducer;
