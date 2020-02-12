@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useRouteMatch, useParams } from 'react-router-dom';
+import { NavLink, useRouteMatch, Route } from 'react-router-dom';
 import { fetchItemsRequest } from '../redux/ducks/menu-items/actions';
 import { addItem as addToTheCart } from '../redux/ducks/cart/actions';
 import classes from '../../css/modules/Menu.module.css';
@@ -8,8 +8,7 @@ import MenuList from '../components/MenuList';
 import Spinner from '../components/Spinner';
 
 const Menu = () => {
-	const { url } = useRouteMatch();
-	const { type = 'pizza' } = useParams();
+	const { url, path } = useRouteMatch();
 
 	const {
 		currency,
@@ -71,11 +70,13 @@ const Menu = () => {
 				) : error ? (
 					<h2 style={{ color: red }}>{error}</h2>
 				) : (
-					<MenuList
-						currency={currency}
-						items={items}
-						addToTheCartHandler={addToTheCartHandler}
-					/>
+					<Route path={`${path}/:filter?`}>
+						<MenuList
+							currency={currency}
+							items={items}
+							addToTheCartHandler={addToTheCartHandler}
+						/>
+					</Route>
 				)}
 			</section>
 		</div>

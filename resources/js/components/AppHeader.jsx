@@ -24,7 +24,7 @@ const AppHeader = () => {
 						Home
 					</NavLink>
 					<NavLink
-						to="/menu"
+						to="/menu/pizza"
 						className={classes.link}
 						activeClassName={classes.active}
 					>

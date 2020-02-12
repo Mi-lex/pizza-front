@@ -34,8 +34,12 @@ const CartItem = (props) => {
 						onDecrement={onDecrementClick}
 					/>
 
-					<span className={classes.summ}>{`${currencyPrice * quantity}${currency.symbol}`}</span>
+					<span className={classes.summ}>{`${toFixed(
+						currencyPrice * quantity,
+						2,
+					)}${currency.symbol}`}</span>
 				</div>
+				<button className={classes.removeBtn} type="button" onClick={onRemoveItemClick}>x</button>
 			</div>
 		</div>
 	);

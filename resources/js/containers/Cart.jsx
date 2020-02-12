@@ -79,7 +79,7 @@ const Cart = () => {
 								onRemoveItemClick={removeItemHanlder.bind(null, item)}
 							/>
 						);
-					})}
+					}).reverse()}
 				</ul>
 				<Link to="/checkout" className={classes.link}>
 					Checkout
