@@ -9,11 +9,9 @@ function* makeOrderRequest(action) {
 			`${baseUrl}/orders`,
 			action.payload,
 		);
-		console.log(response);
-
 		yield put(actions.makeOrderSuccess(response.data.message));
 	} catch (err) {
-		yield put(actions.makeOrderError(err.message));
+		yield put(actions.makeOrderError(err.response.data.message));
 	}
 }
 

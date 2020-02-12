@@ -67,6 +67,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 			updatedState = updatedCartItems;
 		}
+	} else if (type === types.CLEAR_CART) {
+		updatedState = [];
 	}
 
 	return localStorageSync(updatedState);

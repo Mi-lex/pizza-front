@@ -3,7 +3,7 @@ import { types } from './actions';
 const INITIAL_STATE = {
 	list: [],
 	pending: false,
-	error: null,
+	errorMessage: null,
 	successMessage: null,
 };
 
@@ -25,7 +25,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				pending: false,
-				error: action.payload,
+				errorMessage: action.payload,
 			};
 		default:
 			return state;

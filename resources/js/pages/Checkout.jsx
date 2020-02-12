@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import classes from '../../css/modules/Checkout.module.css';
 import Receipt from '../components/Receipt';
 import ContactForm from '../components/ContactForm';
 import { makeOrderRequest } from '../redux/ducks/orders/actions';
+import { clearCart } from '../redux/ducks/cart/actions';
 import { toFixed, getCartTotal } from '../utils';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
@@ -12,7 +14,7 @@ const Checkout = () => {
 	const {
 		cartItems,
 		currency,
-		orders: { pending: makeOrderPending, successMessage },
+		orders: { pending: makeOrderPending, successMessage, errorMessage },
 	} = useSelector((state) => state);
 
 	const delivery = 4;
@@ -33,6 +35,14 @@ const Checkout = () => {
 		dispatch(makeOrderRequest(data));
 	};
 
+	const onSuccess = () => {
+		dispatch(clearCart());
+	};
+
+	if (cartItems.length === 0) {
+		return <Redirect to="/menu/pizza" />;
+	}
+
 	return (
 		<div
 			style={{ paddingBottom: '2.5rem', minHeight: '340px' }}
@@ -50,7 +60,16 @@ const Checkout = () => {
 						bill={bill}
 						currency={currency}
 					/>
-					{successMessage && <Message>{successMessage}</Message>})
+					{successMessage && (
+						<Message style={{ color: 'green' }} onHide={onSuccess}>
+							{successMessage}
+						</Message>
+					)}
+					)
+					{errorMessage && (
+						<Message style={{ color: 'red' }}>{errorMessage}</Message>
+					)}
+					)
 				</>
 			)}
 		</div>
