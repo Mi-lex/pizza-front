@@ -16,12 +16,19 @@ const storeOrder = async (url, order) => {
 
 const authUser = async (url, user) => {
 	const response = await axios.post(url, user);
-		
+
 	return response.data.phone;
+};
+
+const fetchUserOrders = async (url) => {
+	const response = await axios.get(url);
+
+	return response.data;
 };
 
 export default {
 	fetchMenuItems,
 	storeOrder,
 	authUser,
+	fetchUserOrders,
 };

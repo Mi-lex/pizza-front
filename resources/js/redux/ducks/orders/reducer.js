@@ -5,6 +5,7 @@ const INITIAL_STATE = {
 	pending: false,
 	errorMessage: null,
 	successMessage: null,
+	fetchOrdersError: null,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -26,6 +27,22 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				pending: false,
 				errorMessage: action.payload,
+			};
+		case types.FETCH_ORDERS_REQUEST:
+			return {
+				...state,
+				pending: true,
+			};
+		case types.FETCH_ORDERS_SUCCESS:
+			return {
+				...state,
+				pending: false,
+				list: action.payload,
+			};
+		case types.FETCH_ORDERS_ERROR:
+			return {
+				...state,
+				fetchOrdersError: action.payload,
 			};
 		default:
 			return state;

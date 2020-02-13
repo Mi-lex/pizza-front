@@ -15,8 +15,26 @@ function* makeOrderRequest(action) {
 	}
 }
 
+function* fetchOrdersRequest(action) {
+	try {
+		const items = yield call(
+			api.fetchUserOrders,
+			`${baseUrl}/users/${action.payload}/orders`,
+		);
+		yield put(actions.fetchOrdersSuccess(items));
+	} catch (err) {
+		console.log(err.response.data.message);
+
+		yield put(actions.makeOrderError(err.response.data.message));
+	}
+}
+
 export function* watchMakeOrderAsync() {
 	yield takeEvery(types.MAKE_ORDER_REQUEST, makeOrderRequest);
 }
 
-export default watchMakeOrderAsync;
+export function* watchFetchOrdersRequest() {
+	yield takeEvery(types.FETCH_ORDERS_REQUEST, fetchOrdersRequest);
+}
+
+export default [watchMakeOrderAsync, watchFetchOrdersRequest];

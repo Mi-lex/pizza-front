@@ -4,11 +4,10 @@ import classes from '../../css/modules/Receipt.module.css';
 import { toFixed } from '../utils';
 
 const Receipt = (props) => {
-	const { cartItems, currency, delivery, bill } = props;
-	const deliveryCost = 3.5;
+	const { cartItems, currency, delivery, bill, ...restProps } = props;
 
 	return (
-		<div className={classes.receipt}>
+		<div className={classes.receipt} {...restProps}>
 			<div className={classes.box}>
 				<div>
 					<h3>Order Summary</h3>

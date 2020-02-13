@@ -6,6 +6,7 @@ import AppHeader from '../components/AppHeader';
 import Cart from './Cart';
 import CurrencySwitcher from './CurrencySwitcher';
 import configureStore from '../redux/configureStore';
+import AuthRoute from '../components/AuthRoute';
 
 const store = configureStore();
 
@@ -19,7 +20,7 @@ const App = () => {
 						<Switch>
 							<Route path="/" exact component={Home} />
 							<Route path="/menu" component={Menu} />
-							<Route path="/orders" component={Orders} />
+							<AuthRoute path="/orders" component={Orders} />
 							<Route path="/checkout" component={Checkout} />
 							<Route path="/log-in" component={Login} />
 							<Route path="/sign-up" component={SignUp} />

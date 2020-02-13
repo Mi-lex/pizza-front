@@ -4,7 +4,10 @@ import { Redirect } from 'react-router-dom';
 import classes from '../../css/modules/Checkout.module.css';
 import Receipt from '../components/Receipt';
 import ContactForm from '../components/ContactForm';
-import { makeOrderRequest } from '../redux/ducks/orders/actions';
+import {
+	makeOrderRequest,
+	makeOrderSuccess,
+} from '../redux/ducks/orders/actions';
 import { clearCart } from '../redux/ducks/cart/actions';
 import { toFixed, getCartTotal } from '../utils';
 import Message from '../components/Message';
@@ -41,6 +44,7 @@ const Checkout = () => {
 
 	const onSuccess = () => {
 		dispatch(clearCart());
+		dispatch(makeOrderSuccess(null));
 	};
 
 	if (cartItems.length === 0) {
