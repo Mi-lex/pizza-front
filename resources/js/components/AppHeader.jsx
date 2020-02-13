@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { PizzaIcon, OrdersIcon, LoginIcon } from '../assets/img';
 import classes from '../../css/modules/AppHeader.module.css';
 
 const AppHeader = () => {
-	const isLoggedIn = false;
+	const loggedIn = useSelector((state) => state.auth.loggedIn);
 
 	return (
 		<header className={classes.header}>
@@ -30,7 +31,7 @@ const AppHeader = () => {
 					>
 						Menu
 					</NavLink>
-					{isLoggedIn ? (
+					{loggedIn ? (
 						<NavLink
 							to="/orders"
 							className={`${classes.link} ${classes.withIcon}`}

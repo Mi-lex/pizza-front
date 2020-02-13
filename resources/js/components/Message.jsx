@@ -23,7 +23,11 @@ const Message = ({ children, style, onHide }) => {
 };
 
 Message.propTypes = {
-	children: PropTypes.string.isRequired,
+	children: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.node,
+		PropTypes.array,
+	]).isRequired,
 	style: PropTypes.object,
 	onHide: PropTypes.func,
 };

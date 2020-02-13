@@ -1,16 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import StyledForm from '../components/StyledForm';
+import { signUpRequest } from '../redux/ducks/auth/actions';
+import Spinner from '../components/Spinner';
+import Message from '../components/Message';
 
 const SignUp = () => {
+	const [inputs, setInput] = useState({
+		phone: '',
+		password: '',
+		password_confirmation: '',
+	});
+	const { signUpSuccess, signUpError, pending } = useSelector(
+		(state) => state.auth,
+	);
+	const dispatch = useDispatch();
+
+	const handleChange = (event) => {
+		event.preventDefault();
+		const { name, value } = event.target;
+
+		setInput({
+			...inputs,
+			[name]: value,
+		});
+	};
+
+	const handleSubmit = (ev) => {
+		ev.preventDefault();
+
+		const { phone, password, password_confirmation } = inputs;
+		if (!phone || !password || !password_confirmation) return;
+
+		dispatch(signUpRequest(inputs));
+	};
+
 	return (
 		<div className="container lg">
 			<h2 style={{ width: '100%', marginBottom: 0 }}>Sign up</h2>
-			<StyledForm style={{ maxWidth: '80%', margin: '0 auto' }}>
-				<input type="number" placeholder="Number" />
-				<input type="password" placeholder="Password" />
-				<input type="password" placeholder="Confirm your password" />
-				<input type="submit" value="Sign up" id="input-submit" />
-			</StyledForm>
+			{pending ? (
+				<Spinner />
+			) : (
+				<StyledForm
+					onSubmit={handleSubmit}
+					style={{ maxWidth: '80%', margin: '0 auto' }}
+				>
+					<input
+						onChange={handleChange}
+						name="phone"
+						type="number"
+						placeholder="Phone"
+					/>
+					<input
+						onChange={handleChange}
+						name="password"
+						type="password"
+						placeholder="Password"
+					/>
+					<input
+						onChange={handleChange}
+						name="password_confirmation"
+						type="password"
+						placeholder="Confirm your password"
+					/>
+					<input type="submit" value="Sign up" id="input-submit" />
+				</StyledForm>
+			)}
+			{signUpError && (
+				<Message style={{ color: 'red', left: 0 }}>{signUpError}</Message>
+			)}
+
+			{signUpSuccess && (
+				<Message style={{ color: 'green', left: 0 }}>
+					You did it ! Please log in now <Link to="/log-in">here</Link>
+				</Message>
+			)}
 		</div>
 	);
 };

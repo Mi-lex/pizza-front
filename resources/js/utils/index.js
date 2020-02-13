@@ -11,3 +11,9 @@ export const toFixed = (number, decimals) => {
 
 export const getCartTotal = (items) =>
 	items.reduce((summ, { price, quantity }) => summ + price * quantity, 0);
+
+export const localStorageSync = (state, itemName) => {
+	localStorage.setItem(itemName, JSON.stringify(state));
+
+	return state;
+};

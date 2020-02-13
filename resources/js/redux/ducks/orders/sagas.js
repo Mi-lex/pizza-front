@@ -9,7 +9,7 @@ function* makeOrderRequest(action) {
 			`${baseUrl}/orders`,
 			action.payload,
 		);
-		yield put(actions.makeOrderSuccess(response.data.message));
+		yield put(actions.makeOrderSuccess(response));
 	} catch (err) {
 		yield put(actions.makeOrderError(err.response.data.message));
 	}

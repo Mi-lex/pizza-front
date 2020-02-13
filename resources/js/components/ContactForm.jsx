@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import StyledForm from './StyledForm';
-import Spinner from './Spinner';
 import { classesExtractor } from '../utils';
 
 const ContactForm = (props) => {

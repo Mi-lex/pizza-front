@@ -1,4 +1,5 @@
 import { types } from './actions';
+import { localStorageSync } from '../../../utils';
 
 const findInTheCart = (item, cartItems) => {
 	const foundItem = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -12,12 +13,6 @@ const findInTheCart = (item, cartItems) => {
 const removeFromCart = (item, cartItems) => {
 	const filteredItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
 	return [...filteredItems];
-};
-
-const localStorageSync = (state) => {
-	localStorage.setItem('menuItems', JSON.stringify(state));
-
-	return state;
 };
 
 const storedState = localStorage.getItem('menuItems');
@@ -71,7 +66,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 		updatedState = [];
 	}
 
-	return localStorageSync(updatedState);
+	return localStorageSync(updatedState, 'menuItems');
 };
 
 export default reducer;

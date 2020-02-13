@@ -9,12 +9,19 @@ const fetchMenuItems = async (url) => {
 };
 
 const storeOrder = async (url, order) => {
-	const message = await axios.post(url, order);
+	const response = await axios.post(url, order);
 
-	return message;
+	return response.data.message;
+};
+
+const authUser = async (url, user) => {
+	const response = await axios.post(url, user);
+
+	return response.data;
 };
 
 export default {
 	fetchMenuItems,
 	storeOrder,
+	authUser,
 };
