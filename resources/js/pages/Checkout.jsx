@@ -15,6 +15,10 @@ const Checkout = () => {
 		cartItems,
 		currency,
 		orders: { pending: makeOrderPending, successMessage, errorMessage },
+		auth: {
+			loggedIn,
+			user: { phone: savedPhone },
+		},
 	} = useSelector((state) => state);
 
 	const delivery = 4;
@@ -53,7 +57,11 @@ const Checkout = () => {
 			) : (
 				<>
 					<h2 className={classes.title}>Checkout</h2>
-					<ContactForm onSubmit={makeOrderHandler} />
+					<ContactForm
+						loggedIn={loggedIn}
+						savedPhone={savedPhone}
+						onSubmit={makeOrderHandler}
+					/>
 					<Receipt
 						cartItems={cartItems}
 						delivery={delivery}

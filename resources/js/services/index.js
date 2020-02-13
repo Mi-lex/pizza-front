@@ -16,8 +16,8 @@ const storeOrder = async (url, order) => {
 
 const authUser = async (url, user) => {
 	const response = await axios.post(url, user);
-
-	return response.data;
+		
+	return response.data.phone;
 };
 
 export default {

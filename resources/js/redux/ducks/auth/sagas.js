@@ -4,12 +4,12 @@ import actions, { types } from './actions';
 
 function* loginUnser(action) {
 	try {
-		const response = yield call(
+		const phone = yield call(
 			api.authUser,
 			`${baseUrl}/auth/login`,
 			action.payload,
 		);
-		yield put(actions.logInSuccess());
+		yield put(actions.logInSuccess(phone));
 	} catch (err) {
 		yield put(actions.logInError(err.response.data.message));
 	}
@@ -17,7 +17,7 @@ function* loginUnser(action) {
 
 function* signUpUser(action) {
 	try {
-		const response = yield call(
+		const phone = yield call(
 			api.authUser,
 			`${baseUrl}/auth/signup`,
 			action.payload,

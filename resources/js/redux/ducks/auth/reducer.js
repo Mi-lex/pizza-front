@@ -40,6 +40,10 @@ const auth = (state = INITIAL_STATE, action) => {
 			return localStorageSync(
 				{
 					...state,
+					user: {
+						...state.user,
+						phone: action.payload,
+					},
 					signUpSuccess: false,
 					pending: false,
 					loggedIn: true,

@@ -3,12 +3,14 @@ import StyledForm from './StyledForm';
 import { classesExtractor } from '../utils';
 
 const ContactForm = (props) => {
+	const { onSubmit, loggedIn, savedPhone } = props;
+
 	const [inputs, setInput] = useState({
-		phone: {},
+		phone: {
+			value: loggedIn ? savedPhone : '',
+		},
 		address: {},
 	});
-
-	const { onSubmit } = props;
 
 	const handleChange = (event) => {
 		event.preventDefault();
@@ -53,8 +55,9 @@ const ContactForm = (props) => {
 				name="phone"
 				type="number"
 				id="input-number"
-				placeholder="Number"
+				placeholder={loggedIn ? savedPhone : 'Number'}
 				onChange={handleChange}
+				disabled={loggedIn}
 			/>
 			{inputs.phone.error && (
 				<sup style={{ color: 'red' }} className={classesExtractor.errors}>
