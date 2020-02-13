@@ -17,8 +17,6 @@ const Orders = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchOrdersRequest(phone));
-		console.log(error);
-		
 	}, []);
 
 	return (

@@ -25,6 +25,7 @@ function* signUpUser(action) {
 		);
 		yield put(actions.signUpSuccess());
 	} catch (err) {
+		
 		const message = err.response ? err.response.data.message : err.message;
 		yield put(actions.signUpError(message));
 	}

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import StyledForm from '../components/StyledForm';
-import { logInRequest } from '../redux/ducks/auth/actions';
+import {
+	logInRequest,
+	logInError as setError,
+} from '../redux/ducks/auth/actions';
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
 
@@ -33,9 +36,13 @@ const Login = () => {
 		dispatch(logInRequest(inputs));
 	};
 
-	// if (loggedIn) {
-	// 	return <Redirect to="/orders" />;
-	// }
+	const onHideError = () => {
+		dispatch(setError(null));
+	};
+
+	if (loggedIn) {
+		return <Redirect to="/orders" />;
+	}
 
 	return (
 		<div className="container lg">
@@ -72,7 +79,9 @@ const Login = () => {
 				</StyledForm>
 			)}
 			{logInError && (
-				<Message style={{ color: 'red', left: 0 }}>{logInError}</Message>
+				<Message onHide={onHideError} style={{ color: 'red', left: 0 }}>
+					{logInError}
+				</Message>
 			)}
 		</div>
 	);

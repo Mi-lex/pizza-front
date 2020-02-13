@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const baseUrl = 'http://localhost:8000';
+export const baseUrl = 'http://alex-pizza.spb/api';
 
 const fetchMenuItems = async (url) => {
 	const response = await axios.get(url);

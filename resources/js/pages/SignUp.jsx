@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import StyledForm from '../components/StyledForm';
-import { signUpRequest } from '../redux/ducks/auth/actions';
+import { signUpRequest, signUpError as setError } from '../redux/ducks/auth/actions';
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
 
@@ -34,6 +34,10 @@ const SignUp = () => {
 		if (!phone || !password || !password_confirmation) return;
 
 		dispatch(signUpRequest(inputs));
+	};
+
+	const onHideError = () => {
+		dispatch(setError(null));
 	};
 
 	return (
@@ -68,7 +72,7 @@ const SignUp = () => {
 				</StyledForm>
 			)}
 			{signUpError && (
-				<Message style={{ color: 'red', left: 0 }}>{signUpError}</Message>
+				<Message onHide={onHideError} style={{ color: 'red', left: 0 }}>{signUpError}</Message>
 			)}
 
 			{signUpSuccess && (

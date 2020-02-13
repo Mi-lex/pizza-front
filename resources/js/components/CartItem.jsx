@@ -20,7 +20,7 @@ const CartItem = (props) => {
 		<div className={classes.container}>
 			<img
 				className={classes.img}
-				src={`img/menu_items/${type}/${name
+				src={`/img/menu_items/${type}/${name
 					.toLowerCase()
 					.replace(/ /g, '_')}.png`}
 				alt={`${type}-${name}`}

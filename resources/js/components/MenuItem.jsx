@@ -12,7 +12,7 @@ const MenuItem = ({ item, currency, addToTheCartHandler }) => {
 	return (
 		<div className={classes.container}>
 			<img
-				src={`img/menu_items/${type}/${name
+				src={`/img/menu_items/${type}/${name
 					.toLowerCase()
 					.replace(/ /g, '_')}.png`}
 				className={classes.img}
