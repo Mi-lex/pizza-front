@@ -6,6 +6,7 @@ const postcssPresetEnv = require('postcss-preset-env');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const OUTPUT_FOLDER = 'public';
 const ENTRY_FOLDER = 'resources';
@@ -142,6 +143,9 @@ const config = {
 			filename: '[name].css',
 			chunkFilename: '[name].chunk.css',
 		}),
+		new CopyPlugin([
+			{ from: `${ENTRY_FOLDER}/img/menu_items`, to: 'img/menu_items' },
+		]),
 	],
 
 	optimization: {},
