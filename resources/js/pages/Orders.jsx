@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrdersRequest } from '../redux/ducks/orders/actions';
 import Spinner from '../components/Spinner';
+import Message from '../components/Message';
 import classes from '../../css/modules/Orders.module.css';
 import { toFixed } from '../utils';
 
@@ -14,9 +15,10 @@ const Orders = () => {
 		phone: state.auth.user.phone,
 	}));
 	const dispatch = useDispatch();
-
 	useEffect(() => {
 		dispatch(fetchOrdersRequest(phone));
+		console.log(error);
+		
 	}, []);
 
 	return (
@@ -27,7 +29,7 @@ const Orders = () => {
 			{pending ? (
 				<Spinner />
 			) : error ? (
-				<h2 style={{ color: red }}>{error}</h2>
+				<Message style={{ color: 'red', left: 0 }}>{error}</Message>
 			) : (
 				<>
 					<h2>My orders</h2>

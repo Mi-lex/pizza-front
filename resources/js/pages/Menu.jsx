@@ -6,6 +6,7 @@ import { addItem as addToTheCart } from '../redux/ducks/cart/actions';
 import classes from '../../css/modules/Menu.module.css';
 import MenuList from '../components/MenuList';
 import Spinner from '../components/Spinner';
+import Message from '../components/Message';
 
 const Menu = () => {
 	const { url, path } = useRouteMatch();
@@ -68,7 +69,7 @@ const Menu = () => {
 				{pending ? (
 					<Spinner />
 				) : error ? (
-					<h2 style={{ color: red }}>{error}</h2>
+					<Message style={{ color: 'red', left: 0 }}>{error}</Message>
 				) : (
 					<Route path={`${path}/:filter?`}>
 						<MenuList

@@ -31,7 +31,7 @@ export const fetchOrdersSuccess = (orders) => ({
 });
 
 export const fetchOrdersError = (message) => ({
-	type: FETCH_ORDERS_SUCCESS,
+	type: FETCH_ORDERS_ERROR,
 	payload: message,
 });
 
@@ -41,6 +41,7 @@ export default {
 	makeOrderSuccess,
 	fetchOrdersRequest,
 	fetchOrdersSuccess,
+	fetchOrdersError,
 };
 
 export const types = {

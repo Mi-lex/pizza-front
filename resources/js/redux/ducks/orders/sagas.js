@@ -11,7 +11,8 @@ function* makeOrderRequest(action) {
 		);
 		yield put(actions.makeOrderSuccess(response));
 	} catch (err) {
-		yield put(actions.makeOrderError(err.response.data.message));
+		const message = err.response ? err.response.data.message : err.message;
+		yield put(actions.makeOrdersError(message));
 	}
 }
 
@@ -23,9 +24,9 @@ function* fetchOrdersRequest(action) {
 		);
 		yield put(actions.fetchOrdersSuccess(items));
 	} catch (err) {
-		console.log(err.response.data.message);
+		const message = err.response ? err.response.data.message : err.message;
 
-		yield put(actions.makeOrderError(err.response.data.message));
+		yield put(actions.fetchOrdersError(message));
 	}
 }
 

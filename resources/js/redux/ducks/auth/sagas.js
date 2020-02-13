@@ -11,7 +11,8 @@ function* loginUnser(action) {
 		);
 		yield put(actions.logInSuccess(phone));
 	} catch (err) {
-		yield put(actions.logInError(err.response.data.message));
+		const message = err.response ? err.response.data.message : err.message;
+		yield put(actions.logInError(message));
 	}
 }
 
@@ -24,7 +25,8 @@ function* signUpUser(action) {
 		);
 		yield put(actions.signUpSuccess());
 	} catch (err) {
-		yield put(actions.signUpError(err.response.data.message));
+		const message = err.response ? err.response.data.message : err.message;
+		yield put(actions.signUpError(message));
 	}
 }
 

@@ -42,6 +42,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 		case types.FETCH_ORDERS_ERROR:
 			return {
 				...state,
+				pending: false,
 				fetchOrdersError: action.payload,
 			};
 		default:
