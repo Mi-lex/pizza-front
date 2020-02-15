@@ -11,8 +11,7 @@ function* loginUnser(action) {
 		);
 		yield put(actions.logInSuccess(phone));
 	} catch (err) {
-		const message = err.response ? err.response.data.message : err.message;
-		yield put(actions.logInError(message));
+		yield put(actions.logInError(api.getMessageFromError(err)));
 	}
 }
 
@@ -21,8 +20,7 @@ function* signUpUser(action) {
 		yield call(api.authUser, `${baseUrl}/auth/signup`, action.payload);
 		yield put(actions.signUpSuccess(true));
 	} catch (err) {
-		const message = err.response ? err.response.data.message : err.message;
-		yield put(actions.signUpError(message));
+		yield put(actions.signUpError(api.getMessageFromError(err)));
 	}
 }
 
