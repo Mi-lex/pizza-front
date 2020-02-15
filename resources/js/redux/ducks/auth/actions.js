@@ -10,9 +10,8 @@ export const signUpRequest = (user) => ({
 	payload: user,
 });
 
-export const signUpSuccess = (message) => ({
+export const signUpSuccess = () => ({
 	type: SIGN_UP_SUCCESS,
-	payload: message,
 });
 
 export const signUpError = (error) => ({
