@@ -9,7 +9,7 @@ const AppHeader = () => {
 
 	return (
 		<header className={classes.header}>
-			<div className="container d-flex justify-content-between align-items-center">
+			<div className={classes.container}>
 				<Link to="/" className={classes.logo}>
 					<PizzaIcon />
 					Pizza Alex

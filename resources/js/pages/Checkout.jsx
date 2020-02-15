@@ -79,11 +79,9 @@ const Checkout = () => {
 							{successMessage}
 						</Message>
 					)}
-					)
 					{errorMessage && (
 						<Message style={{ color: 'red' }}>{errorMessage}</Message>
 					)}
-					)
 				</>
 			)}
 		</div>

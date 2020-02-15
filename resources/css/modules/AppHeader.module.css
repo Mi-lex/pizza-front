@@ -6,6 +6,18 @@
 	padding: 2px 0;
 }
 
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+@media (max-width: 575.98px) {
+	.container {
+		flex-direction: column;
+	}
+}
+
 .logo {
 	display: flex;
 	align-items: center;

@@ -25,3 +25,9 @@ form {
 .form textarea:focus {
 	border: 2px solid #fac564;
 }
+
+@media (max-width: 575.98px) {
+	.form {
+		min-height: 300px;
+	}
+}
