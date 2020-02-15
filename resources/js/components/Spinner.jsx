@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import classes from '../../css/modules/Spinner.module.css';
 import { generateKey } from '../utils';
 
-const Spinner = ({ top, left, width, radius }) => {
+const Spinner = (props) => {
+	const { top, left, width, radius } = props;
+
 	return (
 		<section className={classes.container}>
 			{Array(12)

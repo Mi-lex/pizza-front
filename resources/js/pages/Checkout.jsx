@@ -19,8 +19,10 @@ const Checkout = () => {
 		currency,
 		orders: { pending: makeOrderPending, successMessage, errorMessage },
 		auth: {
-			loggedIn,
-			user: { phone: savedPhone },
+			logIn: {
+				success: loggedIn,
+				user: { phone: savedPhone },
+			},
 		},
 	} = useSelector((state) => state);
 

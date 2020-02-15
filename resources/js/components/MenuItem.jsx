@@ -50,6 +50,7 @@ MenuItem.propTypes = {
 		toCurrencyRate: PropTypes.number,
 		symbol: PropTypes.string,
 	}).isRequired,
+	addToTheCartHandler: PropTypes.func.isRequired,
 };
 
 export default MenuItem;

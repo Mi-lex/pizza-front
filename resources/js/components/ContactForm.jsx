@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';import PropTypes from 'prop-types';
 import StyledForm from './StyledForm';
 import { classesExtractor } from '../utils';
+
+const validatInputLength = (inputName, inputValue, minlength) =>
+	(inputValue < minlength
+		? `${inputName} must be at least ${minlength} characters long`
+		: null);
 
 const ContactForm = (props) => {
 	const { onSubmit, loggedIn, savedPhone } = props;
 
 	const [inputs, setInput] = useState({
 		phone: {
-			value: loggedIn ? savedPhone : '',
+			value: savedPhone,
 		},
 		address: {},
 	});
 
+	const MinLength = {
+		password: 6,
+		address: 8,
+	};
+
 	const handleChange = (event) => {
 		event.preventDefault();
 		const { name, value } = event.target;
-		let error;
-
-		switch (name) {
-			case 'phone':
-				error = value.length < 4 ? 'Phone cannot be that short' : null;
-				break;
-			case 'address':
-				error = value.length < 6 ? 'Address cannot be that short' : null;
-				break;
-			default:
-				break;
-		}
+		const error = validatInputLength(name, value, MinLength[name]);
 
 		setInput({
 			...inputs,
@@ -79,5 +78,15 @@ const ContactForm = (props) => {
 		</StyledForm>
 	);
 };
+
+ContactForm.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+	loggedIn: PropTypes.bool.isRequired,
+	savedPhone: PropTypes.string,
+}
+
+ContactForm.defaultProps = {
+	savedPhone: '',
+}
 
 export default ContactForm;

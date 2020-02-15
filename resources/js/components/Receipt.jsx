@@ -70,6 +70,8 @@ Receipt.propTypes = {
 		toCurrencyRate: PropTypes.number.isRequired,
 		symbol: PropTypes.string.isRequired,
 	}).isRequired,
+	delivery: PropTypes.number.isRequired,
+	bill: PropTypes.string.isRequired,
 };
 
 export default Receipt;

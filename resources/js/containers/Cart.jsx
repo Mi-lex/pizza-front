@@ -34,15 +34,21 @@ const Cart = () => {
 	};
 
 	const incrementHandler = (item) => {
-		dispatch(incrementItem(item));
+		return () => {
+			dispatch(incrementItem(item));
+		};
 	};
 
 	const decrementHanlder = (item) => {
-		dispatch(decrementItem(item));
+		return () => {
+			dispatch(decrementItem(item));
+		};
 	};
 
 	const removeItemHanlder = (item) => {
-		dispatch(removeItem(item));
+		return () => {
+			dispatch(removeItem(item));
+		};
 	};
 
 	useEffect(() => {
@@ -68,18 +74,20 @@ const Cart = () => {
 			/>
 			<div className={classes.body}>
 				<ul className={classes.list}>
-					{cartItems.map((item) => {
-						return (
-							<CartItem
-								key={item.id}
-								item={item}
-								currency={currency}
-								onIncrementClick={incrementHandler.bind(null, item)}
-								onDecrementClick={decrementHanlder.bind(null, item)}
-								onRemoveItemClick={removeItemHanlder.bind(null, item)}
-							/>
-						);
-					}).reverse()}
+					{cartItems
+						.map((item) => {
+							return (
+								<CartItem
+									key={item.id}
+									item={item}
+									currency={currency}
+									onIncrementClick={incrementHandler(item)}
+									onDecrementClick={decrementHanlder(item)}
+									onRemoveItemClick={removeItemHanlder(item)}
+								/>
+							);
+						})
+						.reverse()}
 				</ul>
 				<Link to="/checkout" className={classes.link}>
 					Checkout

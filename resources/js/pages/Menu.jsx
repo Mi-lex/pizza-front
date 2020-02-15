@@ -22,7 +22,9 @@ const Menu = () => {
 	const dispatch = useDispatch();
 
 	const addToTheCartHandler = (item) => {
-		dispatch(addToTheCart(item));
+		return () => {
+			dispatch(addToTheCart(item));
+		};
 	};
 
 	useEffect(() => {

@@ -9,12 +9,12 @@ const CartHeader = (props) => {
 
 	const currencyTotalSumm = toFixed(totalSumm * currency.toCurrencyRate, 2);
 
-	let headerChildren = 'Empty Cart';
+	let cartHeaderContent = 'Empty Cart';
 
 	if (itemCount > 0) {
 		const itemWord = itemCount > 1 ? 'items' : 'item';
 
-		headerChildren = (
+		cartHeaderContent = (
 			<div>
 				<span className={classes.total}>
 					{currencyTotalSumm}
@@ -25,7 +25,7 @@ const CartHeader = (props) => {
 		);
 	}
 
-	const arrowStyle = isCartOpen ? { transform: 'rotate(180deg)', } : {};
+	const arrowStyle = isCartOpen ? { transform: 'rotate(180deg)' } : {};
 
 	return (
 		<button
@@ -35,7 +35,7 @@ const CartHeader = (props) => {
 			disabled={itemCount === 0}
 		>
 			<CartIcon className={classes.icon} />
-			{headerChildren}
+			{cartHeaderContent}
 			<ArrowIcon
 				style={arrowStyle}
 				className={`${classes.icon} ${classes.arrow}`}
