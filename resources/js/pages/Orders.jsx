@@ -12,7 +12,7 @@ const Orders = () => {
 		phone,
 	} = useSelector((state) => ({
 		orders: state.orders,
-		phone: state.auth.user.phone,
+		phone: state.auth.logIn.user.phone,
 	}));
 	const dispatch = useDispatch();
 	useEffect(() => {

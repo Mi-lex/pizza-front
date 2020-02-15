@@ -14,7 +14,7 @@ const Login = () => {
 		phone: '',
 		password: '',
 	});
-	const { loggedIn, logInError, pending } = useSelector((state) => state.auth);
+	const { success, error, pending } = useSelector((state) => state.auth.logIn);
 	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
@@ -42,7 +42,7 @@ const Login = () => {
 		};
 	}, []);
 
-	if (loggedIn) {
+	if (success) {
 		return <Redirect to="/orders" />;
 	}
 
@@ -80,9 +80,7 @@ const Login = () => {
 					</div>
 				</StyledForm>
 			)}
-			{logInError && (
-				<Message style={{ color: 'red', left: 0 }}>{logInError}</Message>
-			)}
+			{error && <Message style={{ color: 'red', left: 0 }}>{error}</Message>}
 		</div>
 	);
 };

@@ -16,9 +16,7 @@ const SignUp = () => {
 		password: '',
 		password_confirmation: '',
 	});
-	const { signUpSuccess, signUpError, pending } = useSelector(
-		(state) => state.auth,
-	);
+	const { success, error, pending } = useSelector((state) => state.auth.signUp);
 	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
@@ -47,7 +45,7 @@ const SignUp = () => {
 		};
 	}, []);
 
-	if (signUpSuccess) {
+	if (success) {
 		return <Redirect to="/log-in" />;
 	}
 
@@ -82,11 +80,7 @@ const SignUp = () => {
 					<input type="submit" value="Sign up" id="input-submit" />
 				</StyledForm>
 			)}
-			{signUpError && (
-				<Message style={{ color: 'red', left: 0 }}>
-					{signUpError}
-				</Message>
-			)}
+			{error && <Message style={{ color: 'red', left: 0 }}>{error}</Message>}
 		</div>
 	);
 };

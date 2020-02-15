@@ -1,39 +1,57 @@
+import { combineReducers } from 'redux';
 import { types } from './actions';
 import { localStorageSync } from '../../../utils';
 
-const storedState = localStorage.getItem('auth');
+const INITIAL_SIGN_UP_STATE = {
+	pending: false,
+	success: false,
+	error: null,
+};
 
-const INITIAL_STATE = storedState
-	? JSON.parse(storedState)
-	: {
-			user: {},
-			signUpSuccess: false,
-			loggedIn: false,
-			pending: false,
-			signUpError: null,
-			logInError: null,
-	  };
-
-const auth = (state = INITIAL_STATE, action) => {
+const signUp = (state = INITIAL_SIGN_UP_STATE, action) => {
 	switch (action.type) {
 		case types.SIGN_UP_REQUEST:
 			return {
 				...state,
 				pending: true,
-				signUpError: null,
-				signUpSuccess: false,
+				error: null,
+				success: false,
 			};
 		case types.SIGN_UP_SUCCESS:
 			return {
 				...state,
-				signUpSuccess: action.payload,
+				success: action.payload,
 				pending: false,
 			};
+		case types.SIGN_UP_ERROR:
+			return {
+				...state,
+				error: action.payload,
+				pending: false,
+			};
+		default:
+			return state;
+	}
+};
+
+const storedState = localStorage.getItem('login');
+
+const LOG_IN_INITIAL_STATE = storedState
+	? JSON.parse(storedState)
+	: {
+			user: {},
+			success: false,
+			pending: false,
+			error: null,
+	  };
+
+const logIn = (state = LOG_IN_INITIAL_STATE, action) => {
+	switch (action.type) {
 		case types.LOG_IN_REQUEST:
 			return {
 				...state,
 				pending: true,
-				logInError: null,
+				error: null,
 			};
 		case types.LOG_IN_SUCCESS:
 			return localStorageSync(
@@ -44,25 +62,24 @@ const auth = (state = INITIAL_STATE, action) => {
 						phone: action.payload,
 					},
 					pending: false,
-					loggedIn: true,
+					success: true,
 				},
 				'auth',
 			);
-		case types.SIGN_UP_ERROR:
-			return {
-				...state,
-				signUpError: action.payload,
-				pending: false,
-			};
 		case types.LOG_IN_ERROR:
 			return {
 				...state,
-				logInError: action.payload,
+				error: action.payload,
 				pending: false,
 			};
 		default:
 			return state;
 	}
 };
+
+const auth = combineReducers({
+	signUp,
+	logIn,
+});
 
 export default auth;

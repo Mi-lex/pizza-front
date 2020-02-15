@@ -5,7 +5,7 @@ import { PizzaIcon, OrdersIcon, LoginIcon } from '../assets/img';
 import classes from '../../css/modules/AppHeader.module.css';
 
 const AppHeader = () => {
-	const loggedIn = useSelector((state) => state.auth.loggedIn);
+	const loggedIn = useSelector((state) => state.auth.logIn.success);
 
 	return (
 		<header className={classes.header}>
