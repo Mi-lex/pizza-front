@@ -19,7 +19,7 @@ function* loginUnser(action) {
 function* signUpUser(action) {
 	try {
 		yield call(api.authUser, `${baseUrl}/auth/signup`, action.payload);
-		yield put(actions.signUpSuccess());
+		yield put(actions.signUpSuccess(true));
 	} catch (err) {
 		const message = err.response ? err.response.data.message : err.message;
 		yield put(actions.signUpError(message));

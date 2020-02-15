@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import StyledForm from '../components/StyledForm';
@@ -36,9 +36,11 @@ const Login = () => {
 		dispatch(logInRequest(inputs));
 	};
 
-	const onHideError = () => {
-		dispatch(setError(null));
-	};
+	useEffect(() => {
+		return () => {
+			dispatch(setError(null));
+		};
+	}, []);
 
 	if (loggedIn) {
 		return <Redirect to="/orders" />;
@@ -79,9 +81,7 @@ const Login = () => {
 				</StyledForm>
 			)}
 			{logInError && (
-				<Message onHide={onHideError} style={{ color: 'red', left: 0 }}>
-					{logInError}
-				</Message>
+				<Message style={{ color: 'red', left: 0 }}>{logInError}</Message>
 			)}
 		</div>
 	);

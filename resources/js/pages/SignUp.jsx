@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import StyledForm from '../components/StyledForm';
-import { signUpRequest, signUpError as setError } from '../redux/ducks/auth/actions';
+import {
+	signUpRequest,
+	signUpError as setError,
+	signUpSuccess as setSuccess,
+} from '../redux/ducks/auth/actions';
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
 
@@ -36,9 +40,16 @@ const SignUp = () => {
 		dispatch(signUpRequest(inputs));
 	};
 
-	const onHideError = () => {
-		dispatch(setError(null));
-	};
+	useEffect(() => {
+		return () => {
+			dispatch(setError(null));
+			dispatch(setSuccess(false));
+		};
+	}, []);
+
+	if (signUpSuccess) {
+		return <Redirect to="/log-in" />;
+	}
 
 	return (
 		<div className="container lg">
@@ -72,12 +83,8 @@ const SignUp = () => {
 				</StyledForm>
 			)}
 			{signUpError && (
-				<Message onHide={onHideError} style={{ color: 'red', left: 0 }}>{signUpError}</Message>
-			)}
-
-			{signUpSuccess && (
-				<Message style={{ color: 'green', left: 0 }}>
-					You did it ! Please log in now <Link to="/log-in">here</Link>
+				<Message style={{ color: 'red', left: 0 }}>
+					{signUpError}
 				</Message>
 			)}
 		</div>

@@ -26,7 +26,7 @@ const auth = (state = INITIAL_STATE, action) => {
 		case types.SIGN_UP_SUCCESS:
 			return {
 				...state,
-				signUpSuccess: true,
+				signUpSuccess: action.payload,
 				pending: false,
 			};
 		case types.LOG_IN_REQUEST:
@@ -34,7 +34,6 @@ const auth = (state = INITIAL_STATE, action) => {
 				...state,
 				pending: true,
 				logInError: null,
-				signUpSuccess: false,
 			};
 		case types.LOG_IN_SUCCESS:
 			return localStorageSync(
@@ -44,7 +43,6 @@ const auth = (state = INITIAL_STATE, action) => {
 						...state.user,
 						phone: action.payload,
 					},
-					signUpSuccess: false,
 					pending: false,
 					loggedIn: true,
 				},
