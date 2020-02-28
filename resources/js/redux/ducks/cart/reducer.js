@@ -10,10 +10,8 @@ const findInTheCart = (item, cartItems) => {
 	};
 };
 
-const removeFromCart = (item, cartItems) => {
-	const filteredItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
-	return [...filteredItems];
-};
+const removeFromCart = (item, cartItems) =>
+	cartItems.filter((cartItem) => cartItem.id !== item.id);
 
 const storedState = localStorage.getItem('menuItems');
 const INITIAL_STATE = storedState ? JSON.parse(storedState) : [];
