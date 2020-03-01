@@ -1,27 +1,29 @@
 import axios from 'axios';
 
-export const baseUrl = 'http://127.0.0.1:8000/api';
+const api = axios.create({
+	baseURL: 'http://127.0.0.1:8000/api'
+});
 
 const fetchMenuItems = async (url) => {
-	const response = await axios.get(url);
+	const response = await api.get(url);
 
 	return response.data;
 };
 
 const storeOrder = async (url, order) => {
-	const response = await axios.post(url, order);
+	const response = await api.post(url, order);
 
 	return response.data.message;
 };
 
 const authUser = async (url, user) => {
-	const response = await axios.post(url, user);
+	const response = await api.post(url, user);
 
 	return response.data.phone;
 };
 
 const fetchUserOrders = async (url) => {
-	const response = await axios.get(url);
+	const response = await api.get(url);
 
 	return response.data;
 };

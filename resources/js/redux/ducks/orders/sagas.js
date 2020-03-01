@@ -1,12 +1,12 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import api, { baseUrl } from '../../../services';
+import api from '../../../services';
 import actions, { types } from './actions';
 
 function* makeOrderRequest(action) {
 	try {
 		const response = yield call(
 			api.storeOrder,
-			`${baseUrl}/orders`,
+			`orders`,
 			action.payload,
 		);
 		yield put(actions.makeOrderSuccess(response));
@@ -19,7 +19,7 @@ function* fetchOrdersRequest(action) {
 	try {
 		const items = yield call(
 			api.fetchUserOrders,
-			`${baseUrl}/users/${action.payload}/orders`,
+			`users/${action.payload}/orders`,
 		);
 		yield put(actions.fetchOrdersSuccess(items));
 	} catch (err) {

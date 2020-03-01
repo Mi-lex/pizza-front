@@ -1,10 +1,10 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import api, { baseUrl } from '../../../services';
+import api from '../../../services';
 import actions, { types } from './actions';
 
 function* fetchMenuItems() {
 	try {
-		const items = yield call(api.fetchMenuItems, `${baseUrl}/menu_items`);
+		const items = yield call(api.fetchMenuItems, `menu_items`);
 
 		yield put(actions.fetchItemsSuccess(items));
 	} catch (err) {
