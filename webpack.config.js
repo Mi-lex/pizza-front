@@ -1,15 +1,17 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const postcssFlexbugsFixer = require('postcss-flexbugs-fixes');
-const postcssPresetEnv = require('postcss-preset-env');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const postcssFlexbugsFixer = require('postcss-flexbugs-fixes')
+const postcssPresetEnv = require('postcss-preset-env')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
+const CopyPlugin = require('copy-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+	.BundleAnalyzerPlugin
 
-const OUTPUT_FOLDER = 'public';
-const ENTRY_FOLDER = 'resources';
+const OUTPUT_FOLDER = 'public'
+const ENTRY_FOLDER = 'resources'
 
 const getStyleLoaders = (cssOptions, preProcessor) => {
 	const loaders = [
@@ -35,28 +37,28 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 				],
 			},
 		},
-	];
+	]
 	if (preProcessor) {
 		if (Array.isArray(preProcessor)) {
 			for (let i = 0; i < preProcessor.length; i++) {
-				const element = preProcessor[i];
+				const element = preProcessor[i]
 
 				if (typeof element === 'string') {
-					loaders.push(require.resolve(element));
+					loaders.push(require.resolve(element))
 				} else {
 					loaders.push(
 						Object.assign(element, {
 							loader: require.resolve(element.loader),
 						}),
-					);
+					)
 				}
 			}
 		} else {
-			loaders.push(require.resolve(preProcessor));
+			loaders.push(require.resolve(preProcessor))
 		}
 	}
-	return loaders;
-};
+	return loaders
+}
 
 const config = {
 	entry: {
@@ -69,7 +71,7 @@ const config = {
 		path: path.resolve(__dirname, OUTPUT_FOLDER),
 		filename: '[name].js',
 	},
-	devtool: 'inline-source-map',
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
@@ -104,15 +106,7 @@ const config = {
 			},
 			{
 				test: /\.svg$/,
-				use: [
-					// {
-					// 	loader: 'file-loader',
-					// 	options: {
-					// 		name: './img/icons/[name].[ext]',
-					// 	},
-					// },
-					'@svgr/webpack',
-				],
+				use: ['@svgr/webpack'],
 			},
 			{
 				test: /\.(png|jpe?g|gif)$/,
@@ -149,7 +143,7 @@ const config = {
 	],
 
 	optimization: {},
-};
+}
 
 module.exports = (env, argv) => {
 	if (argv.mode === 'production') {
@@ -160,15 +154,19 @@ module.exports = (env, argv) => {
 				verbose: true,
 				dry: false,
 			}),
-		);
-		config.plugins.push(
+		)
+
+		const prodPlugins = [
 			new webpack.LoaderOptionsPlugin({
 				minimize: true,
 			}),
-		);
+			new BundleAnalyzerPlugin(),
+		]
 
-		config.optimization.minimize = true;
+		config.plugins = [...config.plugins, ...prodPlugins]
+
+		config.optimization.minimize = true
 	}
 
-	return config;
-};
+	return config
+}
