@@ -8,8 +8,10 @@
 
 .container {
 	display: flex;
+	max-width: 1280px;
 	align-items: center;
 	justify-content: space-between;
+	margin: 0 auto;
 }
 
 @media (max-width: 575.98px) {
