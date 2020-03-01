@@ -9,6 +9,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const CopyPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin
+const WebpackLaravelMixManifest = require('webpack-laravel-mix-manifest')
 
 const OUTPUT_FOLDER = 'public'
 const ENTRY_FOLDER = 'resources'
@@ -71,7 +72,6 @@ const config = {
 		path: path.resolve(__dirname, OUTPUT_FOLDER),
 		filename: '[name].js',
 	},
-	devtool: 'source-map',
 	module: {
 		rules: [
 			{
@@ -131,12 +131,6 @@ const config = {
 		new HtmlWebpackPlugin({
 			template: `${ENTRY_FOLDER}/index.html`,
 		}),
-		new MiniCssExtractPlugin({
-			// Options similar to the same options in webpackOptions.output
-			// both options are optional
-			filename: '[name].css',
-			chunkFilename: '[name].chunk.css',
-		}),
 		new CopyPlugin([
 			{ from: `${ENTRY_FOLDER}/img/menu_items`, to: 'img/menu_items' },
 		]),
@@ -147,6 +141,8 @@ const config = {
 
 module.exports = (env, argv) => {
 	if (argv.mode === 'production') {
+		config.output.filename = '[name].[hash].js'
+
 		// Plagins
 		config.plugins.unshift(
 			new CleanWebpackPlugin([`${OUTPUT_FOLDER}/img`], {
@@ -160,12 +156,28 @@ module.exports = (env, argv) => {
 			new webpack.LoaderOptionsPlugin({
 				minimize: true,
 			}),
-			new BundleAnalyzerPlugin(),
+			// new BundleAnalyzerPlugin(),
+			new MiniCssExtractPlugin({
+				filename: '[name].[hash].css',
+				chunkFilename: '[name].chunk.css',
+			}),
+			new WebpackLaravelMixManifest(),
 		]
 
 		config.plugins = [...config.plugins, ...prodPlugins]
 
 		config.optimization.minimize = true
+	} else {
+		config.devtool = 'inline-source-map'
+
+		const devPlugins = [
+			new MiniCssExtractPlugin({
+				filename: '[name].css',
+				chunkFilename: '[name].chunk.css',
+			}),
+		]
+
+		config.plugins = [...config.plugins, ...devPlugins]
 	}
 
 	return config
